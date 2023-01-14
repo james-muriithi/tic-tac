@@ -1,3 +1,4 @@
+import { Moves } from './../types/Moves';
 const WINNING_COMBINATIONS = [
 	[0, 1, 2],
 	[3, 4, 5],
@@ -9,6 +10,15 @@ const WINNING_COMBINATIONS = [
 	[2, 4, 6]
 ]
 
-const checkWinner = (moves:number[]) => {
-
+export const checkWinner = (moves: {}) => {
+	let winner: string | null = null;
+	for (let index = 0; index < WINNING_COMBINATIONS.length; index++) {
+		const [x, y, z] = WINNING_COMBINATIONS[index];
+		
+		if (moves[x] === moves[y] && moves[y] === moves[z]) {
+			winner = Moves[moves[x]]
+			break;
+		}
+	}
+	return winner;
 }
