@@ -10,7 +10,7 @@ const WINNING_COMBINATIONS = [
 	[2, 4, 6]
 ]
 
-export const checkWinner = (moves: {}) => {
+export const checkWinner = (moves: {}): string | null => {
 	let winner: string | null = null;
 	for (let index = 0; index < WINNING_COMBINATIONS.length; index++) {
 		const [x, y, z] = WINNING_COMBINATIONS[index];

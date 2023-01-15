@@ -5,7 +5,15 @@ module.exports = {
     "./src/**/*.{vue,js,ts}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      strokeWidth: {
+        '16': '16px',
+        '32': '32px',
+      },
+      minHeight: {
+        '72': '18rem',
+      }
+    },
   },
   plugins: [],
 }
