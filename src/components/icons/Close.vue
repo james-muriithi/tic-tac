@@ -13,8 +13,8 @@
 
 <script setup lang="ts">
 interface SvgProps {
-    height: number,
-    width: number
+    height?: number,
+    width?: number
 } 
 
 withDefaults(defineProps<SvgProps>(), {

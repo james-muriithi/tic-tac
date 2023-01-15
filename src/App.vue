@@ -1,44 +1,17 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { Moves } from "./types/Moves";
-import { checkWinner } from "./utils/gameRules";
-import BoardCell from "./components/BoardCell.vue";
-import Close from "./components/icons/Close.vue";
-import Circle from "./components/icons/Circle.vue";
+import { storeToRefs } from "pinia";
+import { Moves } from "@/types/Moves";
+import { useGameStore } from "@/store/game";
+import BoardCell from "@/components/BoardCell.vue";
+import Close from "@/components/icons/Close.vue";
+import Circle from "@/components/icons/Circle.vue";
 
-const isPlayerOTurn = ref<boolean>(false);
+const store = useGameStore();
 
-const playerXMoves = ref<number[]>([]);
-const playerOMoves = ref<number[]>([]);
-const moves = ref<Object>({});
+const { gameEnded, winner, moves, playerOMoves, playerXMoves, isPlayerOTurn } =
+  storeToRefs(store);
 
-const winner = computed(() => checkWinner(moves.value));
-
-const gameEnded = computed(
-  () => !!winner.value || Object.keys(moves.value).length === 9
-);
-
-const play = (index) => {
-  if (gameEnded.value) return;
-  if (isPlayerOTurn.value) {
-    playerOMoves.value.push(index);
-    isPlayerOTurn.value = false;
-    moves.value[index] = Moves.O;
-  } else {
-    playerXMoves.value.push(index);
-    isPlayerOTurn.value = true;
-    moves.value[index] = Moves.X;
-  }
-};
-
-const startGame = () => {
-  isPlayerOTurn.value = false;
-  // reset board
-  playerXMoves.value = [];
-  playerOMoves.value = [];
-
-  moves.value = {};
-};
+const { play, startGame } = store;
 </script>
 
 <template>
@@ -54,7 +27,6 @@ const startGame = () => {
           :key="i"
           :move="moves[i - 1] || 0"
           @click="play(i - 1)"
-          :class="{ disabled: isPlayerOTurn }"
         />
       </div>
       <div v-if="gameEnded" class="results m-auto">
