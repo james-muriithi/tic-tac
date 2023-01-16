@@ -1,23 +1,27 @@
 import { Moves } from '@/types/Moves';
 import { checkWinner } from '@/utils/gameRules';
 // Utilities
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
+
+type MoveType = {
+    [key: number]: Moves.O | Moves.X,
+};
 
 export const useGameStore = defineStore('game', {
     state: () => ({
-        moves: {},
+        moves: {} as MoveType,
         isPlayerOTurn: false,
-        playerXMoves: [],
-        playerOMoves: [],
+        playerXMoves: [] as number[],
+        playerOMoves: [] as number[],
     }),
     getters: {
-        winner: (state) => checkWinner(state.moves),
-        gameEnded(state) {
+        winner: (state): string | null => checkWinner(state.moves),
+        gameEnded(state): boolean {
             return !!this.winner || Object.keys(state.moves).length === 9
         },
     },
     actions: {
-        play(index) {
+        play(index: number) {
             if (this.gameEnded) return;
             if (this.isPlayerOTurn) {
                 this.playerOMoves.push(index);
