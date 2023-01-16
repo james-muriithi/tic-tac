@@ -21,10 +21,13 @@ export const useGameStore = defineStore('game', {
         gameEnded(state): boolean {
             return !!this.winner || Object.keys(state.moves).length === 9
         },
+        isCellPlayed: (state) => (index:CellIndexes) => {
+            return !!state.moves[index];
+        }
     },
     actions: {
         play(index:CellIndexes) {
-            if (this.gameEnded) return;
+            if (this.gameEnded || this.isCellPlayed(index)) return false;
             if (this.isPlayerOTurn) {
                 this.playerOMoves.push(index);
                 this.isPlayerOTurn = false;
