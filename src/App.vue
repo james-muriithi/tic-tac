@@ -5,6 +5,7 @@ import { useGameStore } from "@/store/game";
 import BoardCell from "@/components/BoardCell.vue";
 import Close from "@/components/icons/Close.vue";
 import Circle from "@/components/icons/Circle.vue";
+import { CellIndexes } from "./types/CellIndexes";
 
 const store = useGameStore();
 
@@ -12,6 +13,10 @@ const { gameEnded, winner, moves } =
   storeToRefs(store);
 
 const { play, startGame } = store;
+
+const cells:CellIndexes[] = new Array(9).fill(0).map((_,index) => index) as CellIndexes[]
+console.log(cells);
+
 </script>
 
 <template>
@@ -25,10 +30,10 @@ const { play, startGame } = store;
         class="w-72 h-72 p-3 mx-auto grid grid-cols-3 grid-rows-3 board"
       >
         <BoardCell
-          v-for="i in 9"
+          v-for="i in cells"
           :key="i"
-          :move="moves[i - 1] || 0"
-          @click="play(i - 1)"
+          :move="moves[i] || 0"
+          @click="play(i)"
         />
       </div>
       <div
