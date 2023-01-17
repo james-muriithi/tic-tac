@@ -7,11 +7,11 @@
     :width="width"
   >
     <path
-      class="stroke-gray-300 stroke-16"
+      class="stroke-gray-300 stroke-16 animate-path"
       d="M16,16L112,112"
     />
     <path
-      class="stroke-gray-300 stroke-16"
+      class="stroke-gray-300 stroke-16 animate-path"
       d="M112,16L16,112"
     />
   </svg>

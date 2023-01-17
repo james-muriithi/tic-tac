@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.animate-path {
+    stroke-dasharray: 470;
+    stroke-dashoffset: 0;
+    animation: fill-path 0.5s linear;
+}
+
+@keyframes fill-path {
+    0% {
+        stroke-dashoffset: 470;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
