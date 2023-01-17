@@ -1,28 +1,30 @@
-import { Moves } from '@/types/Moves';
+import { Players } from '@/types/Players';
 import { WINNING_COMBINATIONS } from '@/utils/gameRules';
 import { CellIndexes } from '@/types/CellIndexes';
 // Utilities
 import { defineStore } from 'pinia';
 
 type MoveType = {
-    [key: number]: Moves.O | Moves.X,
+    [key: number]: Players.O | Players.X,
 };
+
+type Winner = Players.X | Players.O | null;
 
 export const useGameStore = defineStore('game', {
     state: () => ({
         moves: {} as MoveType,
         isPlayerOTurn: false,
-        playerXMoves: [] as number[],
-        playerOMoves: [] as number[],
+        playerXMoves: [] as CellIndexes[],
+        playerOMoves: [] as CellIndexes[],
     }),
     getters: {
-        winner(state): string | null {
-            let winner: string | null = null;
+        winner(state): Winner {
+            let winner: Winner = null;
             for (let index = 0; index < WINNING_COMBINATIONS.length; index++) {
                 const [x, y, z] = WINNING_COMBINATIONS[index];
 
                 if (state.moves[x] === state.moves[y] && state.moves[y] === state.moves[z]) {
-                    winner = Moves[state.moves[x]]
+                    winner = state.moves[x]
                     break;
                 }
             }
@@ -41,11 +43,11 @@ export const useGameStore = defineStore('game', {
             if (this.isPlayerOTurn) {
                 this.playerOMoves.push(index);
                 this.isPlayerOTurn = false;
-                this.moves[index] = Moves.O;
+                this.moves[index] = Players.O;
             } else {
                 this.playerXMoves.push(index);
                 this.isPlayerOTurn = true;
-                this.moves[index] = Moves.X;
+                this.moves[index] = Players.X;
             }
         },
         startGame() {

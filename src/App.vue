@@ -1,22 +1,19 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { Moves } from "@/types/Moves";
+import { Players } from "@/types/Players";
 import { useGameStore } from "@/store/game";
+import { CellIndexes } from "@/types/CellIndexes";
 import BoardCell from "@/components/BoardCell.vue";
 import Close from "@/components/icons/Close.vue";
 import Circle from "@/components/icons/Circle.vue";
-import { CellIndexes } from "./types/CellIndexes";
 
 const store = useGameStore();
 
-const { gameEnded, winner, moves } =
-  storeToRefs(store);
+const { gameEnded, winner, moves } = storeToRefs(store);
 
 const { play, startGame } = store;
 
 const cells:CellIndexes[] = new Array(9).fill(0).map((_,index) => index) as CellIndexes[]
-console.log(cells);
-
 </script>
 
 <template>
@@ -42,12 +39,12 @@ console.log(cells);
       >
         <div class="justify-center flex gap-x-2">
           <Close
-            v-if="!winner || Moves[winner] == Moves['X']"
+            v-if="!winner || winner == Players.X"
             :height="100"
             :width="100"
           />
           <Circle
-            v-if="!winner || Moves[winner] == Moves['O']"
+            v-if="!winner || winner == Players.O"
             :height="100"
             :width="100"
           />
