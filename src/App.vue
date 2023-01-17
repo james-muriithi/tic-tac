@@ -20,7 +20,9 @@ const cells: CellIndexes[] = new Array(9)
 
 <template>
   <div class="container mx-auto rounded-xl p-8 m-10">
-    <h3 class="text-center text-2xl font-bold pb-6">Tic tac toe</h3>
+    <h3 class="text-center text-2xl font-bold pb-6">
+      Tic tac toe
+    </h3>
     <div
       class="
         md:w-2/3
@@ -54,7 +56,10 @@ const cells: CellIndexes[] = new Array(9)
             @click="play(i)"
           />
         </div>
-        <div v-else class="results m-auto absolute">
+        <div
+          v-else
+          class="results m-auto absolute"
+        >
           <div class="justify-center flex gap-x-2">
             <Close
               v-if="!winner || winner == Players.X"
