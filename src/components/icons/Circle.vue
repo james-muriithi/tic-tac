@@ -9,7 +9,7 @@
     <path
       class="stroke-white stroke-16 fill-none"
       d="M64,16A48,48 0 1,0 64,112A48,48 0 1,0 64,16"
-    ></path>
+    />
   </svg>
 </template>
 

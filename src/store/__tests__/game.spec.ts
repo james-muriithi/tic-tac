@@ -1,4 +1,4 @@
-import { describe, it, beforeEach, expect, test } from "vitest";
+import { describe, it, beforeEach, expect } from "vitest";
 import { setActivePinia, createPinia, storeToRefs } from "pinia";
 import { useGameStore } from "@/store/game";
 

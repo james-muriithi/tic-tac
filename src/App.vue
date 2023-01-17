@@ -8,7 +8,7 @@ import Circle from "@/components/icons/Circle.vue";
 
 const store = useGameStore();
 
-const { gameEnded, winner, moves, playerOMoves, playerXMoves, isPlayerOTurn } =
+const { gameEnded, winner, moves } =
   storeToRefs(store);
 
 const { play, startGame } = store;
@@ -16,11 +16,13 @@ const { play, startGame } = store;
 
 <template>
   <div class="container mx-auto rounded-xl p-8 m-10">
-    <h3 class="text-center text-2xl font-bold pb-6">Tic tac toe</h3>
+    <h3 class="text-center text-2xl font-bold pb-6">
+      Tic tac toe
+    </h3>
     <div class="md:w-2/3 bg-teal-500 p-5 mx-auto min-h-72 flex">
       <div
-        class="w-72 h-72 p-3 mx-auto grid grid-cols-3 grid-rows-3 board"
         v-if="!gameEnded"
+        class="w-72 h-72 p-3 mx-auto grid grid-cols-3 grid-rows-3 board"
       >
         <BoardCell
           v-for="i in 9"
@@ -29,17 +31,20 @@ const { play, startGame } = store;
           @click="play(i - 1)"
         />
       </div>
-      <div v-if="gameEnded" class="results m-auto">
+      <div
+        v-if="gameEnded"
+        class="results m-auto"
+      >
         <div class="justify-center flex gap-x-2">
           <Close
+            v-if="!winner || Moves[winner] == Moves['X']"
             :height="100"
             :width="100"
-            v-if="!winner || Moves[winner] == Moves['X']"
           />
           <Circle
+            v-if="!winner || Moves[winner] == Moves['O']"
             :height="100"
             :width="100"
-            v-if="!winner || Moves[winner] == Moves['O']"
           />
         </div>
         <div class="text-center uppercase font-bold text-4xl mt-4">

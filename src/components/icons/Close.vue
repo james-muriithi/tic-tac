@@ -6,8 +6,14 @@
     :height="height"
     :width="width"
   >
-    <path class="stroke-gray-300 stroke-16" d="M16,16L112,112"></path>
-    <path class="stroke-gray-300 stroke-16" d="M112,16L16,112"></path>
+    <path
+      class="stroke-gray-300 stroke-16"
+      d="M16,16L112,112"
+    />
+    <path
+      class="stroke-gray-300 stroke-16"
+      d="M112,16L16,112"
+    />
   </svg>
 </template>
 
